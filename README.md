@@ -1,3 +1,5 @@
+# CI Pillars
+
 Continuous integration (CI) systems should be supported by certain general
 design considerations (or guiding principles) in order that they maintain their
 value as the use of the underlying integration system increases - both in terms
@@ -66,20 +68,18 @@ needs/deficiencies).
       2 things can be fetched in parallel, but are fetched sequentially, then
       rewrite in order to fetch simultaneously)
 * Observable
-   1. Relevant monitoring/telemetry (backend) services run at different layers
-      of the stack to provide insight on resource bottlenecks;
-   2. CI execution environments should automatically report host metrics
+   1. CI execution environments should automatically report host metrics
       capturing things like:
       1. version of the CI execution environment (OCI image name+tag+hash,
-         NixOS /run/current-system, etc.)
+         NixOS `/run/current-system`, AMI ID, etc.)
       2. `machine-id`
       3. available memory
       4. Disk I/O metrics (available space, IOPS, etc.)
       5. network ingress/egress
       6. unused CPU
-   3. CI execution environments or jobs should work to instrument the PID tree
+   2. CI execution environments or jobs should work to instrument the PID tree
       for their jobs to emit metrics related to per-PID resource usage;
-   4. CI logs should be visible within the CI UI but also centrally ingested
+   3. CI logs should be visible within the CI UI but also centrally ingested
       (helps with cases like finding all jobs which failed in some specific,
       identifiable way);
 * Flexible
@@ -91,8 +91,8 @@ needs/deficiencies).
       environment updates (newer OCI runtime version or variant, new CI AMI
       releases, etc.);
    3. CI systems should be “premises-agnostic”, wherever practical (able to run
-      as easily locally as on-prem as within various cloud environments).
+      as easily locally as on-prem as within various cloud environments);
    4. Abstractions over common CI operations should be wrapped in type-safe
       “modules” (type-safe, here, means that exposed parameters are typed),
       consumable in a way that’s independent of the specific CI system (no
-      Actions or Orbs or Components)
+      Actions or Orbs or Components);
