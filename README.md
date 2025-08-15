@@ -18,8 +18,6 @@ needs/deficiencies).
       credentials, or disk space issues, or time of day, etc.);
 * Available
    1. Jobs don’t wait unreasonable amounts of time in order to begin executing;
-   2. Relevant monitoring/telemetry (backend) services run at different layers
-      of the stack to provide insight on resource bottlenecks;
 * Efficient
    1. Jobs utilize a set of system resources (disk IOPS, disk space, CPU
       cycles, RSS allocations, network I/O, etc.) commensurate with the job’s
@@ -68,7 +66,9 @@ needs/deficiencies).
       2 things can be fetched in parallel, but are fetched sequentially, then
       rewrite in order to fetch simultaneously)
 * Observable
-   1. CI execution environments should automatically report host metrics
+   1. Relevant monitoring/telemetry (backend) services run at different layers
+      of the stack to provide insight on resource bottlenecks;
+   2. CI execution environments should automatically report host metrics
       capturing things like:
       1. version of the CI execution environment (OCI image name+tag+hash,
          NixOS /run/current-system, etc.)
@@ -77,14 +77,14 @@ needs/deficiencies).
       4. Disk I/O metrics (available space, IOPS, etc.)
       5. network ingress/egress
       6. unused CPU
-   2. CI execution environments or jobs should work to instrument the PID tree
+   3. CI execution environments or jobs should work to instrument the PID tree
       for their jobs to emit metrics related to per-PID resource usage;
-   3. CI logs should be visible within the CI UI but also centrally ingested
+   4. CI logs should be visible within the CI UI but also centrally ingested
       (helps with cases like finding all jobs which failed in some specific,
       identifiable way);
 * Flexible
    1. CI systems should easily provide support for execution environments which
-      correspond to the host platforms used by developers and target platforms
+      correspond to the build platforms used by developers and host platforms
       associated with the runtime environment of the developed software (where these
       platforms may be changing in time);
    2. CI systems should provide first-class support for rolling out execution
